@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>fonts/Avenir-Medium-09.ttf</file>
+        <file>fonts/Avenir-Book-01.ttf</file>
+        <file>fonts/Avenir-Black-03.ttf</file>
+        <file>fonts/Avenir-MediumOblique-10.ttf</file>
+    </qresource>
+</RCC>

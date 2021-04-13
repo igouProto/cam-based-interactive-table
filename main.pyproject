@@ -1,0 +1,3 @@
+{
+    "files": ["main.py","main.qml","DetectorOpenCV.py","Backend.py","fonts_and_stuff.qrc","CameraThread.py","backend-old.py"]
+}
