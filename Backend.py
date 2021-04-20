@@ -1,11 +1,9 @@
-# source of sample code followed: https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49
-# stripped some excessive stuff
+# some parts of the code followed: https://gist.github.com/YashasSamaga/e2b19a6807a13046e399f4bc3cca3a49
 import errno
 import json
 import socket
 
 import cv2 as cv
-import numpy as np
 import time
 
 import DetectorOpenCV
@@ -77,7 +75,7 @@ cam3 = CameraThread.CameraThread(side2, 640, 480)
 cam2.start()
 cam3.start()
 
-recognition_array = [-1, -1, -1, -1, -1]  # merge the recognition results of the 2 cameras into this array
+recognition_array = [-1, -1, -1, -1, -1, -1]  # the main loop will merge the recognition results of the 2 cameras into this array
 more_than_one = False
 recognized = False
 
@@ -100,45 +98,45 @@ while cv.waitKey(1) < 1:
     frame3 = cam3.read_frame()
 
     resultA = detector_A.detect(frame2)
-    # print(f"detector_A: [{detector_A.more_than_one()}]{resultA}")
     recognition_array.append(resultA)
-    if len(recognition_array) >= 5:
+    if len(recognition_array) >= 6:
         recognition_array.pop(0)
     resultB = detector_B.detect(frame3)
-    # print(f"detector_B: [{detector_B.more_than_one()}]{resultB}")
     recognition_array.append(resultB)
-    if len(recognition_array) >= 5:
+    if len(recognition_array) >= 6:
         recognition_array.pop(0)
+
+    detector_A.draw("CAM_A", frame2)
+    detector_B.draw("CAM_B", frame3)
 
     # prepare to report the recog result
     common_in_list = max(recognition_array, key=recognition_array.count)  # yes, I just let the 2 cameras race for the result.
-    print(f'[{more_than_one}][{recognized}][{common_in_list}] {recognition_array}')
-
     more_than_one = (detector_A.more_than_one() or detector_B.more_than_one()) or (
                 (resultA != resultB) and ((resultA != -1) and (resultB != -1)))
     recognized = common_in_list != -1
 
+    print(f'[{more_than_one}][{recognized}][{common_in_list}] {recognition_array}')
+
+    recog_result['id'] = int(common_in_list)
     recog_result['recognized'] = bool(recognized)
     recog_result['more_than_one'] = bool(more_than_one)
-    recog_result['id'] = int(common_in_list)
-
-    # cv.imshow('SIDE_A', frame2)
-    # cv.imshow('SIDE_B', frame3)
 
     result_to_be_sent = json.dumps(recog_result).encode('utf-8')
     print(result_to_be_sent)
+
     try:
         sock.sendall(result_to_be_sent)
     except IOError as e:
         if e.errno == errno.EPIPE:
             print('UI process was terminated.')
             break
+
     # the UI will first check for more_than_one.
     # if there's more than one item on the table,
     # the incoming recognition will be ignored by the ui, and the Ui will prompt the user to keep only one object on the table.
-    time.sleep(0.45)  # seems like i don't need that much frame rate
+    time.sleep(0.45)  # i don't need that much frame rate
 
-# sock.sendall("stop".encode("utf-8"))
+# some little clean up after breaking from the main loop
 sock.close()
 cv.destroyAllWindows()
 print('backend terminated.')

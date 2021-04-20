@@ -1,8 +1,8 @@
+# example followed: https://gist.github.com/allskyee/7749b9318e914ca45eb0a1000a81bf56
 from threading import Thread, Lock
 import cv2
 import time
 
-# example was from: https://gist.github.com/allskyee/7749b9318e914ca45eb0a1000a81bf56
 
 class CameraThread:
     def __init__(self, port, width, height):
