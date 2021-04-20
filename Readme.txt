@@ -20,4 +20,4 @@ Steps for running the interactive table software:
 
 How to terminate both process correctly:
 
-Terminate the UI window, then the backend will be quit automatically.
+Terminate the UI window, the backend will quit automatically.
