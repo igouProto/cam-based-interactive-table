@@ -10,7 +10,7 @@ Steps for running the interactive table software:
 
 3. Go through the camera process of 'Backend.' The UI will begin running once the camera setup is finished.
 
-4. Move the UI window to the display of the table and put it into full screen.
+4. Move the UI window to the display of the table and put it into full screen by clicking the START button on the GUI window.
 
 5. To stop the process, kill 'Backend.py' first. You may need to press ctrl+c multiple times since there are separate threads grabbing frames from the camera.
 
