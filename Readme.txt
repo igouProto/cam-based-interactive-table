@@ -1,3 +1,5 @@
+See it in action: https://drive.google.com/file/d/1TW7rz7wz7EOY_W90vRoRFOqRxhnv70KB/view?usp=sharing
+
 Steps for running the interactive table software:
 
 0. Connect the display of the table and the cameras to the computer.
