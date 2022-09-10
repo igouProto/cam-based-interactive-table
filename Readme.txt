@@ -1,4 +1,4 @@
-See it in action: https://drive.google.com/file/d/1TOukQw4n47b32L8IuRMRnMANS03uV-eu/view?usp=sharing (starts at 0:25)
+See it in action: https://connectpolyu-my.sharepoint.com/:v:/g/personal/17086108d_connect_polyu_hk/EYISMZiaDrFJibImai-6238BiAGiuA5msakBTEo58LPZag?e=0wtFFw
 
 Steps for running the interactive table software:
 
